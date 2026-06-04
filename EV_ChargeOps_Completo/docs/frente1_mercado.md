@@ -1,0 +1,1 @@
+Pesquisa de mercado: ChargePoint, Wallbox e Zaptec.

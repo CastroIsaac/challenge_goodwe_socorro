@@ -1,0 +1,1 @@
+Arquitetura, backend, banco de dados e fluxo de dados.

@@ -1,0 +1,1 @@
+IA para previsão e detecção de anomalias.
