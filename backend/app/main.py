@@ -16,10 +16,13 @@ async def lifespan(app: FastAPI):
     Base.metadata.create_all(engine)
     with SessionLocal() as db:
         banco_vazio = db.scalar(select(Usuario).limit(1)) is None
-        if banco_vazio and config.popular_banco_se_vazio:
-            from app.seed import popular
-            popular()  # já termina com os modelos treinados
-        else:
+    # A sessão acima precisa estar fechada antes do seed: no PostgreSQL, o DROP TABLE
+    # do seed esperaria para sempre pela transação aberta pelo SELECT.
+    if banco_vazio and config.popular_banco_se_vazio:
+        from app.seed import popular
+        popular()  # já termina com os modelos treinados
+    else:
+        with SessionLocal() as db:
             motor.treinar(db)
     yield
 

@@ -4,7 +4,7 @@ sessoes, faturamento) com campos extras necessários para o rateio e a IA."""
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, Float, ForeignKey, String, UniqueConstraint
+from sqlalchemy import DateTime, Float, ForeignKey, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
@@ -59,8 +59,8 @@ class Sessao(Base):
     # faturavel | em_revisao | rejeitada
     status: Mapped[str] = mapped_column(String(20), default="faturavel")
     score_anomalia: Mapped[float | None] = mapped_column(Float, nullable=True)
-    motivo_revisao: Mapped[str | None] = mapped_column(String(300), nullable=True)
-    observacao_gestor: Mapped[str | None] = mapped_column(String(300), nullable=True)
+    motivo_revisao: Mapped[str | None] = mapped_column(Text, nullable=True)
+    observacao_gestor: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     usuario: Mapped[Usuario] = relationship(back_populates="sessoes")
     carregador: Mapped[Carregador] = relationship()
