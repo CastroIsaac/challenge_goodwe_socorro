@@ -70,3 +70,9 @@ def test_assistente_entende_variacoes_e_erros_de_digitacao():
     assert classificador.classificar("quanto eu vou pagar esse mes?")[0] == "valor_fatura"
     assert classificador.classificar("qnts kwh consumi")[0] == "consumo_mes"
     assert classificador.classificar("melhor horario pra carregar amanha")[0] == "melhor_horario"
+
+
+def test_assistente_descarta_perguntas_fora_do_escopo():
+    classificador = ClassificadorIntencao()
+    assert classificador.classificar("qual a capital da França?")[0] == "desconhecida"
+    assert classificador.classificar("bom dia")[0] == "desconhecida"

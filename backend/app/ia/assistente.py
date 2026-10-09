@@ -2,7 +2,9 @@
 
 Converte a pergunta em texto livre em uma intenção conhecida usando TF-IDF de
 n-gramas de caracteres (tolera erros de digitação e falta de acento) e
-regressão logística. A resposta em si é montada com os dados reais do usuário
+regressão logística. Perguntas fora do escopo são descartadas por dois
+critérios: baixa confiança do classificador OU baixa similaridade (cosseno)
+com todos os exemplos de treino. A resposta em si é montada com os dados reais do usuário
 em services/assistente.py; aqui só decidimos O QUE a pessoa está perguntando.
 """
 
@@ -10,6 +12,7 @@ import unicodedata
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.pipeline import make_pipeline
 
 EXEMPLOS = {
@@ -43,6 +46,9 @@ EXEMPLOS = {
 }
 
 LIMIAR_CONFIANCA = 0.30
+# Medido com perguntas de teste: as válidas ficaram >= 0,57 e as fora do escopo
+# ("qual a capital da França?", "bom dia") <= 0,32
+LIMIAR_SIMILARIDADE = 0.40
 
 
 def normalizar(texto: str) -> str:
@@ -60,12 +66,16 @@ class ClassificadorIntencao:
             TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 4)),
             LogisticRegression(C=10, solver="liblinear"),
         ).fit(frases, rotulos)
+        self._vetorizador = self.modelo[0]
+        self._exemplos = self._vetorizador.transform(frases)
 
     def classificar(self, pergunta: str) -> tuple[str, float]:
         """Retorna (intenção, confiança). Abaixo do limiar, a intenção é "desconhecida"."""
-        probabilidades = self.modelo.predict_proba([normalizar(pergunta)])[0]
+        texto = normalizar(pergunta)
+        probabilidades = self.modelo.predict_proba([texto])[0]
         indice = probabilidades.argmax()
         confianca = float(probabilidades[indice])
-        if confianca < LIMIAR_CONFIANCA:
+        similaridade = cosine_similarity(self._vetorizador.transform([texto]), self._exemplos).max()
+        if confianca < LIMIAR_CONFIANCA or similaridade < LIMIAR_SIMILARIDADE:
             return "desconhecida", confianca
-        return self.modelo.classes_[indice], confianca
+        return str(self.modelo.classes_[indice]), confianca

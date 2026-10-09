@@ -18,6 +18,10 @@ def _brl(valor: float) -> str:
     return f"R$ {valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 
+def _decimal(valor: float) -> str:
+    return f"{valor:.1f}".replace(".", ",")
+
+
 def _quando(momento: datetime) -> str:
     return f"{DIAS[momento.weekday()]} às {momento.hour}h"
 
@@ -30,7 +34,7 @@ def responder(db: Session, usuario: Usuario, pergunta: str, agora: datetime | No
     if intencao == "consumo_mes":
         sessoes = sessoes_do_mes(db, mes, status="faturavel", usuario_id=usuario.id)
         kwh = sum(s.energia_kwh for s in sessoes)
-        texto = (f"Neste mês você fez {len(sessoes)} recargas e consumiu {kwh:.1f} kWh."
+        texto = (f"Neste mês você fez {len(sessoes)} recargas e consumiu {_decimal(kwh)} kWh."
                  if sessoes else "Você ainda não tem recargas faturáveis neste mês.")
 
     elif intencao == "valor_fatura":
