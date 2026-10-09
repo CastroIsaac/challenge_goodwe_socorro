@@ -1,0 +1,38 @@
+services:
+  banco:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: evchargeops
+      POSTGRES_USER: evchargeops
+      POSTGRES_PASSWORD: evchargeops
+    volumes:
+      - dados_banco:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U evchargeops"]
+      interval: 3s
+      retries: 20
+
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://evchargeops:evchargeops@banco:5432/evchargeops
+      CORS_ORIGENS: http://localhost:3000
+      TZ: America/Sao_Paulo
+    ports:
+      - "8000:8000"
+    depends_on:
+      banco:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  dados_banco:
