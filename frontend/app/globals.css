@@ -55,8 +55,8 @@ h2 { font-size: 17px; margin: 0 0 12px; }
 .cabecalho { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
 
 .grade { display: grid; gap: 16px; margin-bottom: 16px; }
-.grade-kpi { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
-.grade-2 { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); }
+.grade-kpi { grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); }
+.grade-2 { grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); }
 
 .cartao {
   background: var(--cartao);
