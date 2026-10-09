@@ -1,0 +1,34 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.13, pytest-8.3.4, pluggy-1.6.0 -- ~/Desktop/FIAP/challenge/backend/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: ~/Desktop/FIAP/challenge/backend
+plugins: anyio-4.15.1
+collecting ... collected 25 items
+
+tests/test_fluxo_api.py::test_modelos_treinados_apos_popular PASSED      [  4%]
+tests/test_fluxo_api.py::test_sessao_normal_entra_no_rateio PASSED       [  8%]
+tests/test_fluxo_api.py::test_sessao_impossivel_vai_para_revisao_e_fica_fora_da_fatura PASSED [ 12%]
+tests/test_fluxo_api.py::test_sessao_duplicada_e_recusada PASSED         [ 16%]
+tests/test_fluxo_api.py::test_rateio_fecha_com_manutencao_exata PASSED   [ 20%]
+tests/test_fluxo_api.py::test_assistente_responde_com_dados_do_usuario PASSED [ 24%]
+tests/test_ia.py::test_regra_fisica_funciona_sem_modelo_treinado PASSED  [ 28%]
+tests/test_ia.py::test_isolation_forest_sinaliza_sessao_atipica_e_aceita_normal PASSED [ 32%]
+tests/test_ia.py::test_detector_exige_historico_minimo PASSED            [ 36%]
+tests/test_ia.py::test_ocupacao_por_hora_divide_minutos_entre_horas PASSED [ 40%]
+tests/test_ia.py::test_previsor_aprende_padrao_semanal PASSED            [ 44%]
+tests/test_ia.py::test_assistente_entende_variacoes_e_erros_de_digitacao PASSED [ 48%]
+tests/test_ia.py::test_assistente_descarta_perguntas_fora_do_escopo PASSED [ 52%]
+tests/test_rateio.py::test_postos_tarifa_branca_dia_util[10-0-fora_ponta] PASSED [ 56%]
+tests/test_rateio.py::test_postos_tarifa_branca_dia_util[16-30-intermediario] PASSED [ 60%]
+tests/test_rateio.py::test_postos_tarifa_branca_dia_util[17-29-intermediario] PASSED [ 64%]
+tests/test_rateio.py::test_postos_tarifa_branca_dia_util[17-30-ponta] PASSED [ 68%]
+tests/test_rateio.py::test_postos_tarifa_branca_dia_util[20-29-ponta] PASSED [ 72%]
+tests/test_rateio.py::test_postos_tarifa_branca_dia_util[20-30-intermediario] PASSED [ 76%]
+tests/test_rateio.py::test_postos_tarifa_branca_dia_util[21-30-fora_ponta] PASSED [ 80%]
+tests/test_rateio.py::test_fim_de_semana_e_sempre_fora_de_ponta PASSED   [ 84%]
+tests/test_rateio.py::test_exemplo_da_sprint01_fora_de_ponta PASSED      [ 88%]
+tests/test_rateio.py::test_energia_dividida_entre_postos PASSED          [ 92%]
+tests/test_rateio.py::test_ocupacao_respeita_tolerancia_e_nivel_de_demanda PASSED [ 96%]
+tests/test_rateio.py::test_divisao_em_centavos_nao_perde_dinheiro PASSED [100%]
+
+============================== 25 passed in 3.39s ==============================

@@ -1,0 +1,261 @@
+
+=== Status dos modelos de IA ===
+{
+  "treinado_em": "2026-10-09T14:24:04.504189",
+  "anomalias": {
+    "treinado": true,
+    "algoritmo": "Isolation Forest + regra de potência máxima",
+    "amostras_treino": 353,
+    "contaminacao": 0.01
+  },
+  "demanda": {
+    "treinado": true,
+    "algoritmo": "Regressão linear regularizada (Ridge) com variáveis sazonais (dia da semana x hora)",
+    "metricas": {
+      "mae_modelo": 0.2296,
+      "mae_baseline_media": 0.2847,
+      "dias_historico": 121
+    }
+  },
+  "perfis": {
+    "treinado": true,
+    "algoritmo": "K-Means (k escolhido por silhueta)",
+    "silhueta": 0.6,
+    "grupos": 5
+  },
+  "assistente": {
+    "treinado": true,
+    "algoritmo": "TF-IDF (n-gramas de caracteres) + regressão logística"
+  }
+}
+
+=== Sessão normal registrada ===
+{
+  "sessao": {
+    "id": "90abe200-76ef-45d7-91a9-cba520df7531",
+    "id_externo": "DEMO-142405-1",
+    "usuario_id": "9904fe26-8971-49c3-9121-c08cf3451f4c",
+    "carregador_id": "77837a72-bc96-448d-96f0-d29ddb1b2ddc",
+    "inicio": "2026-10-08T22:00:00",
+    "fim_recarga": "2026-10-09T01:00:00",
+    "fim": "2026-10-09T01:19:48",
+    "energia_kwh": 20.0,
+    "custo_energia": 15.6,
+    "custo_ocupacao": 0.0,
+    "custo": 15.6,
+    "status": "faturavel",
+    "score_anomalia": -0.1349,
+    "motivo_revisao": null,
+    "observacao_gestor": null
+  },
+  "custo": {
+    "energia_por_posto": {
+      "fora_ponta": 20.0
+    },
+    "custo_energia": 15.6,
+    "minutos_ociosos": 20,
+    "minutos_ociosos_cobrados": 0,
+    "custo_ocupacao": 0.0,
+    "ociosidade_por_nivel": {},
+    "custo_total": 15.6
+  },
+  "ia": {
+    "anomala": false,
+    "score": -0.1349,
+    "motivos": [],
+    "modelo_anomalias_treinado": true,
+    "modelo_demanda_treinado": true
+  }
+}
+
+=== Sessão com ociosidade (taxa de ocupação pela demanda prevista) ===
+{
+  "energia_por_posto": {
+    "fora_ponta": 10.0
+  },
+  "custo_energia": 7.8,
+  "minutos_ociosos": 240,
+  "minutos_ociosos_cobrados": 210,
+  "custo_ocupacao": 10.0,
+  "ociosidade_por_nivel": {
+    "moderada": 150,
+    "baixa": 60
+  },
+  "custo_total": 17.8
+}
+
+=== Sessão suspeita: decisão da IA ===
+{
+  "status": "em_revisao",
+  "anomala": true,
+  "score": -0.0034,
+  "motivos": [
+    "Potência média de 27.5 kW acima do limite do carregador (7.0 kW): possível erro de medição",
+    "Energia entregue (55.0) acima do limite aprendido do histórico (52.5)",
+    "Potência média (27.5) acima do limite aprendido do histórico (7.2)"
+  ],
+  "modelo_anomalias_treinado": true,
+  "modelo_demanda_treinado": true
+}
+
+=== Gestor rejeita a sessão suspeita ===
+{
+  "status": "rejeitada",
+  "observacao": "Leitura duplicada do medidor"
+}
+
+=== Total do rateio antes/depois da revisão (a sessão rejeitada nunca entra) ===
+{
+  "antes": 650.29,
+  "depois": 650.29
+}
+
+=== Rateio de 2026-10 ===
+{
+  "mes": "2026-10",
+  "usuarios_ativos": 8,
+  "custo_manutencao_mensal": 150.0,
+  "total_energia_kwh": 414.51,
+  "total_arrecadado": 650.29,
+  "sessoes_em_revisao": 2,
+  "itens": [
+    {
+      "usuario_id": "a423f371-1c38-4121-a52a-dd09048d4683",
+      "nome": "Ana Ribeiro",
+      "apartamento": "101",
+      "sessoes": 3,
+      "energia_kwh": 79.77,
+      "valor_energia": 71.27,
+      "valor_ocupacao": 82.07,
+      "valor_manutencao": 18.75,
+      "valor_total": 172.09,
+      "sessoes_em_revisao": 1
+    },
+    {
+      "usuario_id": "38c2d22d-df2d-4e35-8fc7-30769dd47be8",
+      "nome": "Bruno Tanaka",
+      "apartamento": "102",
+      "sessoes": 2,
+      "energia_kwh": 41.78,
+      "valor_energia": 33.29,
+      "valor_ocupacao": 52.8,
+      "valor_manutencao": 18.75,
+      "valor_total": 104.84,
+      "sessoes_em_revisao": 0
+    },
+    {
+      "usuario_id": "9904fe26-8971-49c3-9121-c08cf3451f4c",
+      "nome": "Carla Mendes",
+      "apartamento": "203",
+      "sessoes": 3,
+      "energia_kwh": 58.16,
+      "valor_energia": 45.36,
+      "valor_ocupacao": 0.0,
+      "valor_manutencao": 18.75,
+      "valor_total": 64.11,
+      "sessoes_em_revisao": 0
+    },
+    {
+      "usuario_id": "59a35e79-8128-467c-a922-afd0907c452b",
+      "nome": "Diego Alves",
+      "apartamento": "204",
+      "sessoes": 7,
+      "energia_kwh": 77.93,
+      "valor_energia": 60.78,
+      "valor_ocupacao": 25.34,
+      "valor_manutencao": 18.75,
+      "valor_total": 104.87,
+      "sessoes_em_revisao": 0
+    },
+    {
+      "usuario_id": "122b63ef-e3da-48a7-bbf9-a05e73b507cd",
+      "nome": "Elisa Prado",
+      "apartamento": "305",
+      "sessoes": 6,
+      "energia_kwh": 64.17,
+      "valor_energia": 50.05,
+      "valor_ocupacao": 2.0,
+      "valor_manutencao": 18.75,
+      "valor_total": 70.8,
+      "sessoes_em_revisao": 0
+    },
+    {
+      "usuario_id": "99982ed2-9b48-4f77-ac5e-b43cd0712cd7",
+      "nome": "Henrique Souza",
+      "apartamento": "408",
+      "sessoes": 4,
+      "energia_kwh": 37.51,
+      "valor_energia": 29.26,
+      "valor_ocupacao": 4.0,
+      "valor_manutencao": 18.75,
+      "valor_total": 52.01,
+      "sessoes_em_revisao": 0
+    },
+    {
+      "usuario_id": "d198578c-e65e-452d-86b8-0b46d2368fce",
+      "nome": "Isabela Costa",
+      "apartamento": "509",
+      "sessoes": 1,
+      "energia_kwh": 10.3,
+      "valor_energia": 8.03,
+      "valor_ocupacao": 0.2,
+      "valor_manutencao": 18.75,
+      "valor_total": 26.98,
+      "sessoes_em_revisao": 0
+    },
+    {
+      "usuario_id": "c2889b92-f250-4814-abd2-71e14184dbad",
+      "nome": "João Pereira",
+      "apartamento": "510",
+      "sessoes": 3,
+      "energia_kwh": 44.89,
+      "valor_energia": 35.17,
+      "valor_ocupacao": 0.67,
+      "valor_manutencao": 18.75,
+      "valor_total": 54.59,
+      "sessoes_em_revisao": 0
+    }
+  ]
+}
+
+=== Assistente (Carla) — "quanto eu vou pagar esse mes?" ===
+{
+  "intencao": "valor_fatura",
+  "confianca": 0.61,
+  "resposta": "Até agora sua parte do mês é R$ 64,11: R$ 45,36 de energia, R$ 0,00 de ocupação e R$ 18,75 da cota de manutenção."
+}
+
+=== Assistente (Carla) — "qnts kwh consumi" ===
+{
+  "intencao": "consumo_mes",
+  "confianca": 0.77,
+  "resposta": "Neste mês você fez 3 recargas e consumiu 58,2 kWh."
+}
+
+=== Assistente (Carla) — "qual o melhor horario pra carregar?" ===
+{
+  "intencao": "melhor_horario",
+  "confianca": 0.66,
+  "resposta": "Pela previsão de demanda, os horários mais livres nas próximas 48h são: sábado às 8h (6%), sábado às 9h (6%), domingo às 8h (8%). Lembre que entre 17h30 e 20h30 dos dias úteis a tarifa é de ponta."
+}
+
+=== Assistente (Carla) — "qual o horário de pico?" ===
+{
+  "intencao": "horario_mais_usado",
+  "confianca": 0.7,
+  "resposta": "O horário em que mais recargas começam é às 21h (67 sessões no histórico). Nas próximas 48h, o pico previsto é sábado às 23h, com 63% de ocupação."
+}
+
+=== Assistente (Carla) — "qual é meu perfil?" ===
+{
+  "intencao": "perfil",
+  "confianca": 0.67,
+  "resposta": "Seu perfil de uso é \"Noturno\". Você recarrega à noite. Começar depois das 21h30 evita o horário de ponta da tarifa."
+}
+
+=== Assistente (Carla) — "qual a capital da França?" ===
+{
+  "intencao": "desconhecida",
+  "confianca": 0.46,
+  "resposta": "Não entendi. Posso responder sobre seu consumo do mês, quanto você vai pagar, horário de pico, melhor horário para carregar, seu perfil de uso e sessões em revisão."
+}
